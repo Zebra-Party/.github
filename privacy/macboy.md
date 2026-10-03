@@ -1,6 +1,6 @@
 # Privacy Policy — macboy
 
-_Last updated: 2026-09-21_
+_Last updated: 2026-10-03_
 
 macboy is a Game Boy emulator and development toolkit. It runs games you
 supply yourself. We respect your privacy and collect nothing.
@@ -29,22 +29,41 @@ This is your private database. It is governed by Apple's privacy policy.
 We have no server, no account system, and no way to see, store or process
 any of it.
 
+On iPhone and iPad your library is also kept as ordinary files in
+macboy's own iCloud Drive folder, so you can see and manage your ROMs and
+saves in the Files app. That is deliberate — they are your files — but it
+does mean anything with access to your iCloud Drive can read them.
+
 ## What we request from the internet
 
 macboy looks up **cover art** for the games in your library from the
 public [libretro-thumbnails](https://github.com/libretro-thumbnails)
-project on GitHub. To do that it requests a list of available filenames
-and then an image, matched on the game's name.
+project. That takes requests to **two** different services:
 
-That means GitHub receives the ordinary details of a web request — your
-IP address, and the name of the game whose art is being fetched. We do
-not see those requests and nothing about them reaches us. GitHub's use of
-them is governed by GitHub's privacy policy. Art is cached on your device,
-so it is fetched once.
+- **`api.github.com`** — to list the artwork filenames available for the
+  Game Boy and Game Boy Color. This asks only for the system's list and
+  says nothing about you or your games. The list is cached on your device
+  for two weeks.
+- **`thumbnails.libretro.com`** — to fetch the image itself. **The game's
+  name is part of this request.** macboy tries the title stored inside
+  the cartridge and the file's own name, so if you have named a file
+  something personal, that name is what gets sent. When a game has no
+  artwork, several variations of the name may be tried before macboy
+  gives up.
 
-This is the only outbound request macboy makes. If you would rather it
-made none, the app works fully without it; games simply show a plain
-card instead of cover art.
+Those two services therefore see the ordinary details of a web request —
+your IP address — and, for the second, the name of a game in your
+library. We do not see those requests and nothing about them reaches us;
+GitHub's and the libretro project's handling of them is governed by their
+own privacy policies. Images are cached on your device, so a given game
+is fetched once.
+
+These cover-art lookups are the only requests macboy makes to anyone's
+servers, besides your own iCloud. They happen automatically when a game
+appears on screen, and there is currently **no setting to turn them
+off** — we would rather say so than imply a control that isn't there. The
+app is fully usable without them: if the requests fail, games simply show
+a plain card.
 
 ## Playing over a wireless link
 
@@ -53,6 +72,11 @@ over Wi-Fi or Bluetooth, using Apple's Multipeer Connectivity. Nothing
 goes through a server of ours or anyone else's, and nothing is recorded.
 iOS will ask for Local Network permission the first time; declining it
 disables only that feature.
+
+Two things to be straight about: the connection is **not encrypted**, and
+while it is being set up your device advertises its name to other devices
+on the same network. It is meant for playing with someone in the room, on
+a network you trust — not over public Wi-Fi.
 
 ## What we do NOT do
 
@@ -63,6 +87,9 @@ disables only that feature.
 - No personal data is sold or shared with third parties, ever.
 - **No games are included.** macboy ships only its own sample programs
   and a public test ROM. Anything else is a file you provide.
+- **No notifications.** The Apple TV build carries a push-notification
+  entitlement because the App Store requires one alongside iCloud sync,
+  but macboy has no way to send a notification and never does.
 
 ## Children
 
